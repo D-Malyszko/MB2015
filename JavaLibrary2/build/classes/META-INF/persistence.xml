@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="JavaLibrary2PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>data.Factproductinventory</class>
+    <class>data.Dimsalesreason</class>
+    <class>data.Dimproductsubcategory</class>
+    <class>data.Attributetype</class>
+    <class>data.Dimproduct</class>
+    <class>data.Attribute</class>
+    <class>data.Account</class>
+    <class>data.Assetbankuser</class>
+    <class>data.CmCategory</class>
+    <class>data.Dimreseller</class>
+    <class>data.Assettype</class>
+    <class>data.Dimgeography</class>
+    <class>data.Usergroup</class>
+    <class>data.Dimdepartmentgroup</class>
+    <class>data.Country</class>
+    <class>data.Dimscenario</class>
+    <class>data.Assetentity</class>
+    <class>data.Customer</class>
+    <class>data.Fileformat</class>
+    <class>data.Dimsalesterritory</class>
+    <class>data.Dimaccount</class>
+    <class>data.Brand</class>
+    <class>data.NextId</class>
+    <class>data.Dimemployee</class>
+    <class>data.Orgunit</class>
+    <class>data.Factinternetsales</class>
+    <class>data.Factcurrencyrate</class>
+    <class>data.Dimpromotion</class>
+    <class>data.Asset</class>
+    <class>data.CmCategorytype</class>
+    <class>data.Region</class>
+    <class>data.Division</class>
+    <class>data.Address</class>
+    <class>data.Dimcurrency</class>
+    <class>data.Dimproductcategory</class>
+    <class>data.Dimorganization</class>
+    <class>data.Dimdate</class>
+    <class>data.Factcallcenter</class>
+    <class>data.Dimcustomer</class>
+    <class>data.Factsalesquota</class>
+    <class>data.Menuitem</class>
+    <class>data.Attributestoragetype</class>
+    <class>data.Factresellersales</class>
+    <class>data.Factsurveyresponse</class>
+    <class>data.Language</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/assets"/>
+      <property name="javax.persistence.jdbc.user" value="APP"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.password" value="APP"/>
+    </properties>
+  </persistence-unit>
+</persistence>
