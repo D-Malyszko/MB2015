@@ -28,40 +28,58 @@ import java.util.concurrent.Future;
  */
 public class JavaApplication {
 
-	public static void main(String[] args) {
-		try{
- 
-		System.out.println("J2EE from Desktop Java");
-                Properties props = new Properties();
-               
-                InitialContext context = new InitialContext(); 
-               
-	        String name = "java:global/EJBModule/NewSessionBean";
-                
-                System.out.println(name);
-	        test.NewSessionBeanRemote bean = (test.NewSessionBeanRemote)context.lookup(name);
-	        Future<List<Account>> acc = bean.GetAccounts();
-                
-                while (!acc.isDone()) {
-                Thread.sleep(10000);
-                System.out.println("Doing some other client tasks and waiting for server to respond");
-                }
-                
-                List<Account> b = acc.get();
-                
-	        System.out.println("List of accounts :"+b.toString()); 	        
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-        
+//	public static void main(String[] args) {
+//		try{
+// 
+//		System.out.println("J2EE from Desktop Java");
+//                Properties props = new Properties();
+//               
+//                InitialContext context = new InitialContext(); 
+//               
+//	        String name = "java:global/EJBModule/NewSessionBean";
+//                
+//                System.out.println(name);
+//	        test.NewSessionBeanRemote bean = (test.NewSessionBeanRemote)context.lookup(name);
+//	        Future<List<Account>> acc = bean.GetAccounts();
+//                
+//                while (!acc.isDone()) {
+//                Thread.sleep(10000);
+//                System.out.println("Doing some other client tasks and waiting for server to respond");
+//                }
+//                
+//                List<Account> b = acc.get();
+//                
+//	        System.out.println("List of accounts :"+b.toString()); 	        
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//	}
+//        
         private static InitialContext context;
     
+        public static List GetEntities(Class T) throws Exception {
+                                   
+                if(bean == null)
+                    bean = GetBeans();
+                
+                List b = bean.GetEntities(T);
+                                
+	        System.out.println("List of accounts :"+b.toString()); 	        
+		
+                return b;
+                
+	}
+        
+    
+        static ArrayList ens;
+        
         public static List<Account> GetAccounts() throws Exception {
                                    
                 if(bean == null)
                     bean = GetBeans();
-	        
+                
+                ArrayList ens = bean.entities();
+                
                 Future<List<Account>> acc = bean.GetAccounts();
                 
                 List<Account> b = acc.get();
@@ -70,11 +88,21 @@ public class JavaApplication {
 		
                 return b;
                 
-                
 	}
 
+           public static ArrayList GetEntities() throws Exception {
+                                   
+                if(bean == null)
+                    bean = GetBeans();
+                
+                ens = bean.entities();
+                     
+		
+                return ens;
+                
+	}
+        
         public static void CreateAccount(String id) throws Exception {
-                    
                     
                 InitialContext context = null;
                    
@@ -83,17 +111,12 @@ public class JavaApplication {
 	        
                 Account account = new data.Account(id);
                 
-                
+                                
                 bean.CreateAccount(account);
-                
                                 
 	        System.out.println("Account created : "+id.toString()); 	        
-		
-                               
-                
+               
 	}
-
-                
                 
         public static test.NewSessionBeanRemote bean = null;
                 
@@ -109,6 +132,7 @@ public class JavaApplication {
 	        String name = "java:global/EJBModule/NewSessionBean";
                 
                 System.out.println(name);
+                
 	        bean = (test.NewSessionBeanRemote)context.lookup(name);
 	        
 		
@@ -143,7 +167,17 @@ public class JavaApplication {
         }
         return null;
     }       
-                
+    
+public static Object toObject( Class clazz, String value ) {
+    if( Boolean.class == clazz ) return Boolean.parseBoolean( value );
+    if( Byte.class == clazz ) return Byte.parseByte( value );
+    if( Short.class == clazz ) return Short.parseShort( value );
+    if( Integer.class == clazz ) return Integer.parseInt( value );
+    if( Long.class == clazz ) return Long.parseLong( value );
+    if( Float.class == clazz ) return Float.parseFloat( value );
+    if( Double.class == clazz ) return Double.parseDouble( value );
+    return value;
+}
 }
     
 

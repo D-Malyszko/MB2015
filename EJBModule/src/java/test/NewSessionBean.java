@@ -15,10 +15,14 @@ import javax.persistence.PersistenceContext;
 import data.AccountJpaController;
 import data.Customer;
 import data.CustomerJpaController;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.concurrent.Future;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.interceptor.Interceptors;
+import javax.persistence.metamodel.ManagedType;
+import javax.persistence.metamodel.Metamodel;
 
 
 
@@ -99,8 +103,49 @@ public class NewSessionBean implements NewSessionBeanRemote {
          return customer;
         
     }
+     
+   public ArrayList entities() {
+       
+ 
+    ArrayList cls = new ArrayList();
+    
+    final EntityManagerFactory emf = Persistence.createEntityManagerFactory("EJBModule1PU");
+    final Metamodel mm = emf.getMetamodel();
+    for (final ManagedType<?> managedType : mm.getManagedTypes()) {
+      Class clazz = managedType.getJavaType(); // this returns the java class of the @Entity object
+      System.out.println("ejb " + clazz.getName());
+      cls.add(clazz);
+    }
+    return cls;
+  }
+   
+     public AbstractFacade entities(Class T) {
+       
+         System.out.println(T.getName());
+         
+         String name = T.getName();
+         
+         if(name.equals("data.Account") == true)
+             return new AccountFacade();
       
-      
+             return null;
+             
+    
+    
+  }
+   
+   
+     public List<Class> GetEntities(Class T){
+         
+         
+         AbstractFacade f = entities(T);
+         
+         return f.findAll();
+         
+         
+     }
+     
+     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

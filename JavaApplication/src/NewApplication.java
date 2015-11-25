@@ -1,7 +1,13 @@
 
+
 import data.Account;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,8 +29,11 @@ public class NewApplication extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Desktop J2EE Enterprise");
         initGUI();
+        listEntities = jList1;
     }
 
+    JList listEntities;
+    
     DefaultTableModel tm = null;
     
     
@@ -51,11 +60,29 @@ public class NewApplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jSplitPane2 = new javax.swing.JSplitPane();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton8 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -71,7 +98,17 @@ public class NewApplication extends javax.swing.JFrame {
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
+        jTextField2.setText("jTextField2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSplitPane1.setDividerLocation(300);
+        jSplitPane1.setAutoscrolls(true);
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(179, 100));
+
+        jSplitPane2.setDividerLocation(600);
+
+        jTextField3.setText("30000000");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +137,140 @@ public class NewApplication extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("123456789");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+
+        jSplitPane2.setLeftComponent(jPanel2);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        jButton8.setText("Update / insert");
+        jButton8.setActionCommand("");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton8))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8)
+                .addGap(6, 6, 6))
+        );
+
+        jTabbedPane1.addTab("Edit", jPanel3);
+
+        jSplitPane2.setRightComponent(jTabbedPane1);
+
+        jSplitPane1.setRightComponent(jSplitPane2);
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        jToolBar1.setRollover(true);
+
+        jButton5.setText("Load");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton5);
+
+        jButton6.setText("Open");
+        jButton6.setFocusable(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton6);
+
+        jButton7.setText("Save");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton7);
+
+        jButton3.setText("All Entities");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        jButton4.setText("Open");
 
         menuBar.setName("Desktop J2EE Enterprise"); // NOI18N
 
@@ -171,29 +341,27 @@ public class NewApplication extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
-                    .addComponent(jScrollPane1))
-                .addGap(96, 96, 96))
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -203,42 +371,229 @@ public class NewApplication extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    ArrayList<Class> ens = null;
+    
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         
-        tm.setNumRows(0);
         
-        try{      
- 
-            List<Account> acc = JavaApplication.GetAccounts();
-        
-        int r = 0;
-        for(Account a: acc) {
-        
-            Object [] obs = new Object[2];
-            
-            tm.addRow(obs);
-          
-            jTable1.updateUI();
-            
-            jTable1.getModel().setValueAt(a.getAccountId(), r++, 1);
-        
-        }
-         }
-         catch(Exception ex){};
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         
         try{
-        JavaApplication.CreateAccount(jTextField1.getText());
+            ens = JavaApplication.GetEntities();
         }
         catch(Exception ex){};
         
+                
+        DefaultListModel list = new DefaultListModel();
+        
+        
+        for(Class ent: ens)
+        list.addElement(ent.getName());
+            
+        listEntities.setModel(list);
+
+        
+        
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+        
+        
+        int index = listEntities.getSelectedIndex();
+        
+        if(index < 0)
+            return;
+        Class clazz = null;
+        if(ens != null)
+            clazz = (Class)ens.get(index);
+        
+        LoadTable(clazz);
+        
+        
+        
+        
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        //new Thread(() -> doWork(someParam)).start();
+
+        try{
+            JavaApplication.CreateAccount(jTextField3.getText());
+        }
+        catch(Exception ex){};
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+  
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+
+        model.setNumRows(0);
+
+        jTable1.setModel(model);
+
+        int index = listEntities.getSelectedIndex();
+
+        if(index < 0)
+        return;
+        Class clazz = null;
+        if(ens != null)
+        clazz = (Class)ens.get(index);
+
+        try{
+
+            List<Object> acc = JavaApplication.GetEntities(clazz);
+
+            int r = 0;
+
+            int c = 0;
+
+            for(Object a: acc) {
+
+                Field[] fields = a.getClass().getDeclaredFields();
+
+                Object [] obs = new Object[fields.length];
+
+                model = (DefaultTableModel)jTable1.getModel();
+
+                model.addRow(obs);
+
+                jTable1.setModel(model);
+
+                c = 0;
+
+                for(Field field: fields){
+
+                    field.setAccessible(true);
+
+                    Object v = field.get(a);
+
+                    if(v == null)
+                    v = "";
+
+                    
+                    jTable1.getModel().setValueAt(v.toString(), r, c++);
+
+                }
+
+                r++;
+            }
+
+            jTable1.repaint();
+
+            EditTable();
+            
+        }
+        catch(Exception ex){};
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+      private void EditTable() {                                         
+        // TODO add your handling code here:
+
+  
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+
+        model.setColumnCount(3);
+
+        model.setNumRows(0);
+        
+        
+        jTable2.setModel(model);
+
+        TableColumn tc = jTable2.getColumnModel().getColumn(0);
+        tc.setHeaderValue("Field Name");
+        tc = jTable2.getColumnModel().getColumn(1);
+        tc.setHeaderValue("Value");
+        tc = jTable2.getColumnModel().getColumn(2);
+        tc.setHeaderValue("Type");
+        
+        int index = listEntities.getSelectedIndex();
+
+        if(index < 0)
+        return;
+        Class clazz = null;
+        if(ens != null)
+        clazz = (Class)ens.get(index);
+
+        try{
+
+            Field[] fields = clazz.getDeclaredFields();
+
+            
+
+            for(Field f: fields) {
+
+                
+                Object [] obs = new Object[3];
+
+                model = (DefaultTableModel)jTable2.getModel();
+
+                f.setAccessible(true);
+
+                obs[0] = f.getName();
+                obs[2] = f.getType().getName();
+                
+                if(f.getName() == "" || f.getName() == null )
+                    continue;
+                
+                model.addRow(obs);
+
+                jTable2.setModel(model);
+                
+ 
+
+                }
+
+               
+            
+
+            jTable2.repaint();
+
+        }
+        catch(Exception ex){};
+    }
+    
+    
+    DefaultTableModel model = null;
+    
+      public void LoadTable(Class clazz) {
+          
+          
+                    model = new DefaultTableModel();
+          
+                    Field[] fields = clazz.getDeclaredFields();
+          
+                    Integer C = fields.length;
+                    
+          
+                    model.setColumnCount(C);
+  
+                    jTable1.setModel(model);
+                    
+                    
+                    for(int i=0;i<C;i++){
+
+                    TableColumn tc = jTable1.getColumnModel().getColumn(i);
+                    
+                    Field field = fields[i];
+
+                        tc.setHeaderValue(field.getName());
+                    
+                    }
+                    
+                    // Replace model
+                    
+                    
+                    jTable1.repaint();
+                }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -286,9 +641,27 @@ public class NewApplication extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

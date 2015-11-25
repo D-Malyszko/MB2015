@@ -7,6 +7,7 @@ package test;
 
 import data.Account;
 import data.Customer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import javax.ejb.Remote;
@@ -23,4 +24,8 @@ public interface NewSessionBeanRemote {
     public Object CreateCustomer(Customer customer) throws Exception;
     
     public Object CreateAccount(Account account) throws Exception;
+    
+    public ArrayList entities();
+    
+    public List<Class> GetEntities(Class T);
 }
