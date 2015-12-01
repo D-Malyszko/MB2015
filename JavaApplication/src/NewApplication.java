@@ -121,16 +121,21 @@ public class NewApplication extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Get Accounts");
+        jButton1.setText("Get Entity");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Create New Account");
+        jButton2.setText("Create New");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -149,7 +154,7 @@ public class NewApplication extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
@@ -186,6 +191,11 @@ public class NewApplication extends javax.swing.JFrame {
 
         jButton8.setText("Update / insert");
         jButton8.setActionCommand("");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -419,14 +429,24 @@ public class NewApplication extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
+        
+        if(clazz == null)
+            return;
+        
+        EditTable(clazz);
+        
+        
         //new Thread(() -> doWork(someParam)).start();
 
-        try{
-            JavaApplication.CreateAccount(jTextField3.getText());
-        }
-        catch(Exception ex){};
+        //try{
+        //    JavaApplication.CreateAccount(jTextField3.getText());
+        //}
+        //catch(Exception ex){};
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    public Class clazz = null;
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
@@ -440,10 +460,12 @@ public class NewApplication extends javax.swing.JFrame {
         int index = listEntities.getSelectedIndex();
 
         if(index < 0)
-        return;
-        Class clazz = null;
+            return;
+        
+        clazz = null;
+        
         if(ens != null)
-        clazz = (Class)ens.get(index);
+            clazz = (Class)ens.get(index);
 
         try{
 
@@ -475,7 +497,6 @@ public class NewApplication extends javax.swing.JFrame {
 
                     if(v == null)
                     v = "";
-
                     
                     jTable1.getModel().setValueAt(v.toString(), r, c++);
 
@@ -492,7 +513,143 @@ public class NewApplication extends javax.swing.JFrame {
         catch(Exception ex){};
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        NewRecord();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        int index = jTable1.getSelectedRow();
+
+        if(index < 0)
+            return;
+        
+        Class clazz = null;
+        
+        if(JavaApplication.entities != null) {
+            
+            
+            
+            
+            Object object = JavaApplication.entities.get(index);
+
+            clazz = object.getClass();
+            
+            
+            EditTable(clazz, object);
+        
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+          private void EditTable(Class clazz, Object object) {                                         
+        // TODO add your handling code here:
+
+  
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+
+        model.setColumnCount(3);
+
+        model.setNumRows(0);
+        
+        
+        jTable2.setModel(model);
+
+        TableColumn tc = jTable2.getColumnModel().getColumn(0);
+        tc.setHeaderValue("Field Name");
+        tc = jTable2.getColumnModel().getColumn(1);
+        tc.setHeaderValue("Value");
+        tc = jTable2.getColumnModel().getColumn(2);
+        tc.setHeaderValue("Type");
+        
+      
+        try{
+
+            Field[] fields = clazz.getDeclaredFields();
+
+            for(Field f: fields) {
+
+                
+                Object [] obs = new Object[3];
+
+                model = (DefaultTableModel)jTable2.getModel();
+
+                f.setAccessible(true);
+
+                obs[0] = f.getName();
+                obs[1] = f.get(object);
+                obs[2] = f.getType().getName();
+                
+                if(f.getName() == "" || f.getName() == null )
+                    continue;
+                
+                model.addRow(obs);
+
+                jTable2.setModel(model);
+
+                }
+
+            jTable2.repaint();
+
+        }
+        catch(Exception ex){};
+    }
     
+    private void EditTable(Class clazz) {                                         
+        // TODO add your handling code here:
+
+  
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+
+        model.setColumnCount(3);
+
+        model.setNumRows(0);
+        
+        
+        jTable2.setModel(model);
+
+        TableColumn tc = jTable2.getColumnModel().getColumn(0);
+        tc.setHeaderValue("Field Name");
+        tc = jTable2.getColumnModel().getColumn(1);
+        tc.setHeaderValue("Value");
+        tc = jTable2.getColumnModel().getColumn(2);
+        tc.setHeaderValue("Type");
+        
+      
+        try{
+
+            Field[] fields = clazz.getDeclaredFields();
+
+            for(Field f: fields) {
+
+                
+                Object [] obs = new Object[3];
+
+                model = (DefaultTableModel)jTable2.getModel();
+
+                f.setAccessible(true);
+
+                obs[0] = f.getName();
+                obs[2] = f.getType().getName();
+                
+                if(f.getName() == "" || f.getName() == null )
+                    continue;
+                
+                model.addRow(obs);
+
+                jTable2.setModel(model);
+
+                }
+
+            jTable2.repaint();
+
+        }
+        catch(Exception ex){};
+    }
+          
+          
       private void EditTable() {                                         
         // TODO add your handling code here:
 
@@ -516,16 +673,14 @@ public class NewApplication extends javax.swing.JFrame {
         int index = listEntities.getSelectedIndex();
 
         if(index < 0)
-        return;
+            return;
         Class clazz = null;
         if(ens != null)
-        clazz = (Class)ens.get(index);
+            clazz = (Class)ens.get(index);
 
         try{
 
             Field[] fields = clazz.getDeclaredFields();
-
-            
 
             for(Field f: fields) {
 
@@ -545,13 +700,8 @@ public class NewApplication extends javax.swing.JFrame {
                 model.addRow(obs);
 
                 jTable2.setModel(model);
-                
- 
 
                 }
-
-               
-            
 
             jTable2.repaint();
 
@@ -559,7 +709,70 @@ public class NewApplication extends javax.swing.JFrame {
         catch(Exception ex){};
     }
     
-    
+      private void NewRecord() {                                         
+        // TODO add your handling code here:
+
+      
+        //int index = listEntities.getSelectedIndex();
+
+        if(clazz == null)
+            return;
+        
+        
+      //  if(index < 0)
+      //      return;
+      //  Class clazz = null;
+      //  if(ens != null)
+      //      clazz = (Class)ens.get(index);
+
+        
+        Object obs = null;
+        
+        try{
+        
+            obs = clazz.newInstance();
+        }
+        catch(Exception ex){};
+        try{
+
+            Field[] fields = clazz.getDeclaredFields();
+
+            
+            int i = 0;
+            for(Field f: fields) {
+
+                String value = (String) jTable2.getValueAt(i++, 1);
+              
+                if(value == null)
+                    value =  "";
+
+                if(value == "")
+                    continue;
+                
+                f.setAccessible(true);
+
+                //obs[0] = f.getName();
+                //obs[2] = f.getType().getName();
+                
+                if(f.getName() == "" || f.getName() == null )
+                    continue;
+              
+                Object object = JavaApplication.toObject(f.getType(), value);
+                
+                if(object != null)
+                    //if(object != "")
+
+                f.set(obs, object);
+
+            }
+
+            JavaApplication.CreateEntity(obs);
+
+        }
+        catch(Exception ex){};
+       
+    }
+      
     DefaultTableModel model = null;
     
       public void LoadTable(Class clazz) {

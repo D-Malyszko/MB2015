@@ -28,6 +28,44 @@ is divided into following sections:
     <!-- 
                 INITIALIZATION SECTION 
             -->
+
+<target name="glassfish-startServer" description="deploys application to glassfish">
+<exec failonerror="true" executable="cmd">
+   <arg value="/c"/> 
+
+    <arg value="start C:\GlassFish_Server\glassfish\bin\\startserv.bat"/> 
+  
+</exec>
+</target>
+
+ <target name="deploys"
+    description="starts glassfish">
+   
+ <exec failonerror="true" executable="cmd">
+   
+  <arg value="/c" />
+    
+   <arg value="c:\GlassFish_Server\bin\asadmin --user admin  --passwordfile c:\dist\password.txt  deploy c:\dist\EnterpriseApplication.ear" />
+  
+  </exec>
+</target>
+
+
+
+<target name="glassfish-stopServer">
+ 
+ <exec dir="C:\GlassFish_Server\glassfish\bin"
+        executable="cmd.exe"  >
+ 
+   <arg value="/c"/> 
+  
+  <arg value="stopserv.bat"/> 
+ 
+ </exec>
+</target>
+
+
+
     <target name="-pre-init">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemas>
+    <schema name="APP">
+        <table name="CUSTOMER">
+            <pk name="SQL151104225608920" column="ID"/>
+            <column name="ID" type="integer" not-null="true" default="GENERATED_BY_DEFAULT" size="10"/>
+            <column name="EMAIL" type="varchar" size="255"/>
+            <column name="FIRSTNAME" type="varchar" size="255"/>
+            <column name="LASTNAME" type="varchar" size="255"/>
+        </table>
+        <table name="NEWSENTITY">
+            <pk name="SQL151102211639600" column="ID"/>
+            <column name="ID" type="bigint" not-null="true" size="19"/>
+            <column name="BODY" type="varchar" size="255"/>
+            <column name="TITLE" type="varchar" size="255"/>
+        </table>
+        <table name="PRODUCT">
+            <pk name="SQL151104225609140" column="ID"/>
+            <column name="ID" type="integer" not-null="true" default="GENERATED_BY_DEFAULT" size="10"/>
+            <column name="NAME" type="varchar" size="255"/>
+            <column name="PRICE" type="double" size="52"/>
+        </table>
+        <table name="PURCHASE">
+            <pk name="SQL151104225609350" column="ID"/>
+            <column name="ID" type="integer" not-null="true" default="GENERATED_BY_DEFAULT" size="10"/>
+            <column name="ID_CUSTOMER" type="integer" size="10"/>
+            <fk name="PURCHASEIDCUSTOMER" delete-action="restrict" to-table="APP.CUSTOMER" column="ID_CUSTOMER"/>
+            <index name="SQL151104225609810" column="ID_CUSTOMER"/>
+        </table>
+        <table name="PURCHASE_ITEM">
+            <pk name="SQL151104225609590" column="ID"/>
+            <column name="ID" type="integer" not-null="true" default="GENERATED_BY_DEFAULT" size="10"/>
+            <column name="QUANTITY" type="integer" size="10"/>
+            <column name="ID_PRODUCT" type="integer" size="10"/>
+            <column name="ID_PURCHASE" type="integer" size="10"/>
+            <fk name="PRCHASEITEMDPRDUCT" delete-action="restrict" to-table="APP.PRODUCT" column="ID_PRODUCT"/>
+            <fk name="PRCHSEITEMDPRCHASE" delete-action="restrict" to-table="APP.PURCHASE" column="ID_PURCHASE"/>
+            <index name="SQL151104225609990" column="ID_PRODUCT"/>
+            <index name="SQL151104225610210" column="ID_PURCHASE"/>
+        </table>
+        <table name="SEQUENCE">
+            <pk name="SQL151028232656670" column="SEQ_NAME"/>
+            <column name="SEQ_NAME" type="varchar" not-null="true" size="50"/>
+            <column name="SEQ_COUNT" type="decimal" size="15"/>
+        </table>
+    </schema>
+</schemas>

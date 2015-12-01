@@ -1,0 +1,19 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="1.0">
+        <persistence-unit name="example-derby"
+            transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="openjpa.ConnectionProperties" 
+            value="DriverClassName=org.apache.derby.jdbc.ClientDriver,
+              Url=jdbc:derby://localhost:1527/sample, 
+              MaxActive=100, 
+              MaxWait=10000, 
+              TestOnBorrow=true, 
+              Username=APP, 
+              Password=APP"/>
+            <property name="openjpa.ConnectionDriverName" 
+            value="org.apache.commons.dbcp.BasicDataSource"/>
+        </properties>
+        </persistence-unit>
+    </persistence>

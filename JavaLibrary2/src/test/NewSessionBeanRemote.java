@@ -25,6 +25,8 @@ public interface NewSessionBeanRemote {
     
     public Object CreateAccount(Account account) throws Exception;
     
+    public Object CreateEntity(Object object) throws Exception;
+    
     public ArrayList entities();
     
     public List<Class> GetEntities(Class T);

@@ -28,45 +28,22 @@ import java.util.concurrent.Future;
  */
 public class JavaApplication {
 
-//	public static void main(String[] args) {
-//		try{
-// 
-//		System.out.println("J2EE from Desktop Java");
-//                Properties props = new Properties();
-//               
-//                InitialContext context = new InitialContext(); 
-//               
-//	        String name = "java:global/EJBModule/NewSessionBean";
-//                
-//                System.out.println(name);
-//	        test.NewSessionBeanRemote bean = (test.NewSessionBeanRemote)context.lookup(name);
-//	        Future<List<Account>> acc = bean.GetAccounts();
-//                
-//                while (!acc.isDone()) {
-//                Thread.sleep(10000);
-//                System.out.println("Doing some other client tasks and waiting for server to respond");
-//                }
-//                
-//                List<Account> b = acc.get();
-//                
-//	        System.out.println("List of accounts :"+b.toString()); 	        
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//	}
-//        
+    
         private static InitialContext context;
     
+        
+        public static List entities = null;
+        
         public static List GetEntities(Class T) throws Exception {
                                    
                 if(bean == null)
                     bean = GetBeans();
                 
-                List b = bean.GetEntities(T);
+                entities = bean.GetEntities(T);
                                 
-	        System.out.println("List of accounts :"+b.toString()); 	        
+	        System.out.println("List of accounts :"+ entities.toString()); 	        
 		
-                return b;
+                return entities;
                 
 	}
         
@@ -117,15 +94,29 @@ public class JavaApplication {
 	        System.out.println("Account created : "+id.toString()); 	        
                
 	}
-                
+         
+        
+        public static void CreateEntity(Object object) throws Exception {
+                    
+                InitialContext context = null;
+                   
+                if(bean == null)
+                    bean = GetBeans();
+	        
+               bean.CreateEntity(object);
+                                
+	        System.out.println("Entity created..."); 	        
+               
+	}
+        
         public static test.NewSessionBeanRemote bean = null;
                 
     	public static test.NewSessionBeanRemote GetBean() {
                     
 		try{
  
-		System.out.println("J2EE from Desktop Java");
-                Properties props = new Properties();
+		//System.out.println("J2EE from Desktop Java");
+                //Properties props = new Properties();
                
                 InitialContext context = new InitialContext(); 
 	        	                        

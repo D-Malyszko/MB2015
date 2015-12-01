@@ -16,7 +16,8 @@ import data.AccountJpaController;
 import data.Customer;
 import data.CustomerJpaController;
 import java.util.ArrayList;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Future;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
@@ -48,6 +49,8 @@ public class NewSessionBean implements NewSessionBeanRemote {
     
     
     private static AccountJpaController c;
+    
+    public static Map<String, Class> maps = null;
 
     public void persist(Object object) {
         em.persist(object);
@@ -86,7 +89,21 @@ public class NewSessionBean implements NewSessionBeanRemote {
         
     }
     
+    @Interceptors(SampleInterceptor.class)
+      public Object CreateEntity(Object object)throws Exception{
+        
+          
+        AbstractFacade f = entities(object.getClass());
+         
+         f.create(object);
+          
+        return object;
+     
+        
+    }
 
+      
+      
       @SampleBinding(transaction=true)
        public Object CreateCustomer(Customer customer)throws Exception{
            
@@ -104,6 +121,17 @@ public class NewSessionBean implements NewSessionBeanRemote {
         
     }
      
+   public void LoadMappers(){
+       
+       if(maps != null)
+           return;
+       
+       maps = new HashMap<String, Class>();
+       
+       
+       
+   }    
+       
    public ArrayList entities() {
        
  
@@ -113,7 +141,33 @@ public class NewSessionBean implements NewSessionBeanRemote {
     final Metamodel mm = emf.getMetamodel();
     for (final ManagedType<?> managedType : mm.getManagedTypes()) {
       Class clazz = managedType.getJavaType(); // this returns the java class of the @Entity object
+      
       System.out.println("ejb " + clazz.getName());
+      
+      String[] str = clazz.getName().split("\\.");
+      
+      String name = str[1];
+      
+      String f = "test." + name + "Facade";
+      
+      try{
+          
+      Class claz = Class.forName(f);    
+          
+      String fs = claz.getName();
+      
+      if(maps == null)
+                
+       maps = new HashMap<String, Class>();
+      
+      maps.put(clazz.getName(), claz);
+      
+      
+      System.out.println("Class created - " + fs);
+      
+      }
+      catch(Exception ex){};
+      
       cls.add(clazz);
     }
     return cls;
@@ -124,6 +178,26 @@ public class NewSessionBean implements NewSessionBeanRemote {
          System.out.println(T.getName());
          
          String name = T.getName();
+         
+         if(maps.containsKey(name)) {
+         
+         Class clazz = maps.get(name);
+         
+         Object object = null;
+         
+         try{
+             
+            object = clazz.newInstance();
+            System.out.println("Facade created");
+         
+         }
+         catch(Exception ex){};
+         
+         return (AbstractFacade)object;
+             
+         }
+         
+         System.out.println("Facade has not been created");
          
          if(name.equals("data.Account") == true)
              return new AccountFacade();
