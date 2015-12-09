@@ -1,13 +1,21 @@
 
 
-import data.Account;
+import java.io.FileInputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import org.apache.commons.logging.Log; 
+import org.apache.commons.logging.LogFactory; 
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,6 +30,9 @@ import javax.swing.table.TableColumn;
  */
 public class NewApplication extends javax.swing.JFrame {
 
+    
+    private Log logger = LogFactory.getLog(NewApplication.class);
+    
     /**
      * Creates new form NewApplication
      */
@@ -30,6 +41,23 @@ public class NewApplication extends javax.swing.JFrame {
         this.setTitle("Desktop J2EE Enterprise");
         initGUI();
         listEntities = jList1;
+        
+             logger.info("Test info");
+
+                logger.debug("Test info");
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+    @Override
+    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+       
+        
+        
+        System.out.println(logger.toString());
+        
+    }
+});
+        
+        
     }
 
     JList listEntities;
@@ -834,6 +862,20 @@ public class NewApplication extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        Logger log = Logger.getLogger("NewApplication");
+        try {
+            FileInputStream fis =  new FileInputStream("p.properties");
+            LogManager.getLogManager().readConfiguration(fis);
+            log.setLevel(Level.FINE);
+            log.addHandler(new java.util.logging.ConsoleHandler());
+            log.setUseParentHandlers(false);
+
+            log.info("starting NewApplication");
+            fis.close();
+        }
+        catch(Exception e){};
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
