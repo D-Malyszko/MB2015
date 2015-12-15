@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="build-all" name="all-projects">
   <target description="Build all projects" name="build-project">
-    <ant antfile="build.xml" target="build-project" dir="./AOPSpring" inheritAll="false"/>
+    <ant antfile="build.xml" target="build-project" dir="./SpringAOP" inheritAll="false"/>
     
    </target>
 <target depends="build-project" name="test">
